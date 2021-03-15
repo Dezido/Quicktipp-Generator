@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class Lotto extends Lotterie{
-	
+
 	//Superzahl aus 0-9
 	private int superzahl;
 
@@ -15,8 +15,8 @@ public class Lotto extends Lotterie{
 	public void setSuperzahl(int superzahl) {
 		this.superzahl = superzahl;
 	}
-	
-	
+
+
 	public int superzahlZiehen(int[] unglueckszahlen) { 
 		int superzahl = new Random().nextInt(10) ;
 		while(contains(unglueckszahlen,superzahl)) {
@@ -33,8 +33,12 @@ public class Lotto extends Lotterie{
 
 	@Override
 	public boolean areValid(int[] unglueckszahlen) {
-		// TODO Auto-generated method stub
+		for(int i=0; i<unglueckszahlen.length;i++) {
+			if(unglueckszahlen[i]>49) {
+				return false;
+			}
+		}
 		return true;
 	}
-	
+
 }

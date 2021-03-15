@@ -10,7 +10,7 @@ public abstract class Lotterie implements Playable {
 		this.zuZiehendeKugeln = zuZiehendeKugeln;
 		this.gesamtzahlKugeln = gesamtzahlKugeln;
 	}
-	
+
 	public int[] getTippreihe() {
 		return tippreihe;
 	}

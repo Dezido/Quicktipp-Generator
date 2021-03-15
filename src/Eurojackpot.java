@@ -1,5 +1,5 @@
 public class Eurojackpot  extends Lotterie {
-	
+
 	//Eurozahlen 2 aus 10
 	private int [] eurozahlen = new int [2]; 
 
@@ -22,7 +22,11 @@ public class Eurojackpot  extends Lotterie {
 
 	@Override
 	public boolean areValid(int[] unglueckszahlen) {
-		//TODO 
+		for(int i=0; i<unglueckszahlen.length;i++) {
+			if(unglueckszahlen[i]>50) {
+				return false;
+			}
+		}
 		return true;
 	}
 

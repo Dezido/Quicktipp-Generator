@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class QuicktippLogger {
-		
+
 	public static Logger setupLogger()
 	{	
 		final Logger logger = Logger.getLogger(QuicktippLogger.class.getName());
@@ -17,7 +17,7 @@ public class QuicktippLogger {
 			fh.setLevel(Level.FINE);
 			logger.addHandler(fh);
 			SimpleFormatter formatter = new SimpleFormatter();  
-	        fh.setFormatter(formatter);  
+			fh.setFormatter(formatter);  
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, "File Logger not working.", e);
 		}
