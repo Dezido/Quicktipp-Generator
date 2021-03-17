@@ -83,6 +83,7 @@ public class Quicktipp {
 				System.exit(0);
 			}
 		}
+		System.out.println();
 		System.out.println("------------------------------------------");		
 		System.out.println("Folgende Unglückszahlen werden verwendet:\n ");
 		System.out.println(java.util.Arrays.toString(unglueckszahlen));
@@ -200,7 +201,11 @@ public class Quicktipp {
 		System.out.println();
 		System.out.println("1: Lotto 6aus49 Quicktipp erstellen");
 		System.out.println("2: Eurojackpot Quicktipp erstellen");
-		System.out.println("3: Gespeicherte Unglückszahlen löschen");
+		if(unglueckszahlenSaved()) {
+		System.out.println("3: Gespeicherte Unglückszahlen löschen (gespeicherte Unglückszahlen: " + java.util.Arrays.toString(loadUnglueckszahlen()) +")" );
+		}else {
+			System.out.println("3: Gespeicherte Unglückszahlen löschen (Keine gespeicherten Zahlen zum Löschen vorhanden)");
+		}
 		System.out.println("4: Programm beenden");
 		System.out.println();
 		logger.info("Die Optionen wurden dem Benutzer angezeigt.");
@@ -211,7 +216,8 @@ public class Quicktipp {
 			Scanner keyboard = new Scanner(System.in);
 			int option = keyboard.nextInt();			
 			while (option <0||option >4) {
-				System.out.println("Falsche Eingabe \nDie Optionen lauten 1,2,3 oder 4");
+				System.out.println("Ungültige Eingabe");
+				printMenuOptions();
 				option = keyboard.nextInt();
 			}
 			switch (option) {
@@ -244,14 +250,15 @@ public class Quicktipp {
 					keyboard.close();
 					logger.info("Die in Unglueckszahlen.txt gespeicherten Unglückszahlen wurden gelöscht. Das Programm wird beendet.\n");
 					System.exit(0);
-				}			
+				}				
 			case 4:
 				System.out.println("Programm wird beendet");
 				System.out.println("Danke für die Nutzung des Quicktipp-Generators");
 				keyboard.close();
 				logger.info("Der Benutzer hat Option 4 (Programm beenden) gewählt.");
 				logger.info("Das Programm wird beendet.\n");
-				System.exit(0);				
+				System.exit(0);		
+			
 			}
 		} catch (InputMismatchException e) {
 			logger.severe("Ungültige Eingabe durch den Benutzer. Das Menü wird erneut aufgerufen.");
