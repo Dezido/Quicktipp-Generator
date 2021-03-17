@@ -12,8 +12,12 @@ public class Quicktipp {
 	private static Logger logger = QuicktippLogger.setupLogger();	
 
 	public static void main(String[] args) {
-		try {			
-			menu(parseArgs(args));			
+		try {		
+			if(checkParsedArgs(parseArgs(args))) {
+				logger.info("Übergebene Argumente: " + java.util.Arrays.toString(args));
+				filePresent();
+				menu(parseArgs(args));			
+			}
 		} catch (NumberFormatException e) {
 			logger.severe("Argumente ungültig: " + java.util.Arrays.toString(args)+"\n");
 			System.out.println("Bitte geben Sie "+ "java Quicktipp" + " gefolgt von bis zu sechs Unglückszahlen ein");
@@ -26,23 +30,35 @@ public class Quicktipp {
 		for(int i=0;i<args.length;i++) {
 			unglueckszahlen[i]=Integer.parseInt(args[i]);
 		}
-		logger.info("Übergebene Argumente: " + java.util.Arrays.toString(args));
 		return unglueckszahlen;		
 	}
 
 	public static boolean checkParsedArgs (int [] unglueckszahlen) {
+
 		if(unglueckszahlen.length>6) {
-			logger.info("Der Benutzer hat mehr als 6 Zahlen übergeben.");
+			logger.info("Der Benutzer hat mehr als 6 Zahlen übergeben.\n");
+			System.out.println("Die übergebenen Unglückszahlen sind ungültig. Es können bis zu 6 verschiedene Zahlen zwischen 0 und 50 verwendet werden");
+			System.out.println("Rufen Sie bitte die Anwendung erneut mit gültigen Ünglückszahlen auf");
 			return false;
 		}
 		for(int i=0; i<unglueckszahlen.length;i++) {
-			if(unglueckszahlen[i]<0||unglueckszahlen[i]>50) {
-				logger.info("Ungültige Eigabe: " + unglueckszahlen[i] + " ist kleiner als 0 oder größer als 50.");
+			if(unglueckszahlen[i]<0) {
+				logger.info("Ungültige Eigabe: " + unglueckszahlen[i] + " ist kleiner als 0.\n");
+				System.out.println("Die übergebenen Unglückszahlen sind ungültig. Es können bis zu 6 verschiedene Zahlen zwischen 0 und 50 verwendet werden");
+				System.out.println("Rufen Sie bitte die Anwendung erneut mit gültigen Ünglückszahlen auf");
+				return false;
+			}
+			if(unglueckszahlen[i]>50) {
+				logger.info("Ungültige Eigabe: " + unglueckszahlen[i] + " ist größer als 50.\n");
+				System.out.println("Die übergebenen Unglückszahlen sind ungültig. Es können bis zu 6 verschiedene Zahlen zwischen 0 und 50 verwendet werden");
+				System.out.println("Rufen Sie bitte die Anwendung erneut mit gültigen Ünglückszahlen auf");
 				return false;
 			}
 			for(int j=0; j<unglueckszahlen.length;j++) {
 				if(unglueckszahlen[i]==unglueckszahlen[j]&&i!=j) {
-					logger.info("Ungültige Eingabe: " + unglueckszahlen[i] +  " ist doppelt vorhanden.");
+					logger.info("Ungültige Eingabe: " + unglueckszahlen[i] +  " ist mehrfach vorhanden.\n");
+					System.out.println("Die übergebenen Unglückszahlen sind ungültig. Es können bis zu 6 verschiedene Zahlen zwischen 0 und 50 verwendet werden");
+					System.out.println("Rufen Sie bitte die Anwendung erneut mit gültigen Ünglückszahlen auf");
 					return false;
 				}
 			}
@@ -50,16 +66,41 @@ public class Quicktipp {
 		return true;
 	}
 
+
+	public static void unglueckszahlenSource(int [] unglueckszahlen) {
+
+		if(unglueckszahlen.length==0) {
+			if(unglueckszahlenSaved()) {					
+				System.out.println("Sie haben keine neuen Ünglückszahlen übergeben");
+				System.out.println("Es werden die gespeicherten Unglückszahlen verwendet");
+				unglueckszahlen=loadUnglueckszahlen();
+				logger.info("Keine neuen Unglückszahlen übergeben. Es werden die gespeicherten Zahlen verwendet.");
+			}else {
+				System.err.println("Es sind keine gespeicherten Unglückszahlen vorhanden");
+				System.out.println("Bitte geben Sie "+ "java Quicktipp" + " gefolgt von bis zu sechs Unglückszahlen ein");
+				System.out.println("Die Ünglückszahlen müssen ganzzahlig sein und Werte zwischen 0 und 50 haben");
+				logger.info("Keine gespeicherten Unglückszahlen vorhanden. Das Programm wird beendet.\n");
+				System.exit(0);
+			}
+		}
+		System.out.println("------------------------------------------");		
+		System.out.println("Folgende Unglückszahlen werden verwendet:\n ");
+		System.out.println(java.util.Arrays.toString(unglueckszahlen));
+		System.out.println("------------------------------------------");	
+		logger.info("Die Unglückszahlen " + java.util.Arrays.toString(unglueckszahlen) + " werden dem Benutzer angezeigt.");
+	}
+
 	public static void lottoQuicktipp(int [] unglueckszahlen) {		
 		Lotto lotto = new Lotto(6,49);
 		lotto.generate(unglueckszahlen);
 		logger.info("Tippreihe Lotto: " + java.util.Arrays.toString(lotto.getTippreihe()));
 		logger.info("Superzahl: " + lotto.getSuperzahl());
-		System.out.println();
+		System.out.println("******************************************");
 		System.out.println("Tippreihe Lotto: " + java.util.Arrays.toString(lotto.getTippreihe()));
 		System.out.println("Superzahl: " +lotto.getSuperzahl());
+		System.out.println("******************************************");
 		System.out.println();
-		System.out.println("Danke für die Nutzung des Quicktipp-Generators");
+
 	}
 
 	public static void eurojackpotQuicktipp(int[] unglueckszahlen) {
@@ -67,11 +108,11 @@ public class Quicktipp {
 		eurojackpot.generate(unglueckszahlen);				
 		logger.info("Tippreihe Eurojackpot: " + java.util.Arrays.toString(eurojackpot.getTippreihe()));
 		logger.info("Eurozahlen: " + java.util.Arrays.toString(eurojackpot.getEurozahlen()));				
-		System.out.println();
+		System.out.println("********************************************");
 		System.out.println("Tippreihe Eurojackpot: " + java.util.Arrays.toString(eurojackpot.getTippreihe()));
 		System.out.println("Eurozahlen: " + java.util.Arrays.toString(eurojackpot.getEurozahlen()));
+		System.out.println("********************************************");
 		System.out.println();
-		System.out.println("Danke für die Nutzung des Quicktipp-Generators");
 	}
 
 	public static boolean filePresent() {
@@ -82,7 +123,7 @@ public class Quicktipp {
 		}
 		try {
 			f.createNewFile();
-			logger.info("Unglueckszahlen.txt wurde erstellt");
+			logger.info("Datei zum Speichern der Unglückszahlen nicht vorhanden. Unglueckszahlen.txt wurde erstellt.");
 		} catch (IOException e) {
 			System.out.println("Erstellen der Datei zum Speichern der Unglückszahlen fehlgeschlagen");
 			logger.severe("Erstellen der Datei zum Speichern der Unglückszahlen fehlgeschlagen.");
@@ -111,7 +152,7 @@ public class Quicktipp {
 			logger.info("Übergebene Unglückszahlen wurden in Unglueckszahlen.txt gespeichert.");
 		} catch (FileNotFoundException e) {
 			logger.severe("Unglueckszahlen.txt ist nicht vorhanden.");
-			System.out.println("Die Datei zum speichern der Unglückszahlen ist nicht vorhanden");
+			System.out.println("Die Datei zum Speichern der Unglückszahlen ist nicht vorhanden");
 		}				
 	}
 
@@ -124,7 +165,7 @@ public class Quicktipp {
 			}
 		} catch (FileNotFoundException e) {
 			logger.severe("Unglueckszahlen.txt ist nicht vorhanden.\n");
-			System.out.println("Die Datei zum laden der Unglückszahlen ist nicht vorhanden");
+			System.out.println("Die Datei zum Laden der Unglückszahlen ist nicht vorhanden");
 		}
 		return unglueckszahlen;
 	}
@@ -148,7 +189,7 @@ public class Quicktipp {
 			}				
 		} catch (FileNotFoundException e) {
 			logger.severe("Unglueckszahlen.txt ist nicht vorhanden.\n");
-			System.out.println("Die Datei zum laden der Unglückszahlen ist nicht vorhanden");
+			System.out.println("Die Datei zum Laden der Unglückszahlen ist nicht vorhanden");
 		}
 		return count;
 	}
@@ -161,32 +202,8 @@ public class Quicktipp {
 		System.out.println("2: Eurojackpot Quicktipp erstellen");
 		System.out.println("3: Gespeicherte Unglückszahlen löschen");
 		System.out.println("4: Programm beenden");
-		logger.info("Die Menüoptionen wurden dem Benutzer angezeigt.");
-	}
-
-	public static void useCorrectUnglueckszahlen(int [] unglueckszahlen) {
-		if(!checkParsedArgs(unglueckszahlen)) {
-			System.out.println("Die übergebenen Unglückszahlen sind ungültig. Es können bis zu 6 verschiedene Zahlen zwischen 0 und 50 verwendet werden");
-			System.out.println("Rufen Sie bitte die Anwendung erneut mit gültigen Ünglückszahlen auf");
-			logger.info("Die verwendeten Unglückszahlen: " + java.util.Arrays.toString(unglueckszahlen) + " sind ungültig. Das Programm wird beendet.\n");
-			System.exit(0);
-		}
-		if(unglueckszahlen.length==0) {
-			if(unglueckszahlenSaved()) {					
-				System.out.println("Sie haben keine neuen Ünglückszahlen übergeben");
-				System.out.println("Es werden die gespeicherten Unglückszahlen verwendet");
-				unglueckszahlen=loadUnglueckszahlen();
-				logger.info("Keine neuen Unglückszahlen übergeben. Es werden die gespeicherten Zahlen verwendet.");
-			}else {
-				System.err.println("Es sind keine gespeicherten Unglückszahlen vorhanden");
-				System.out.println("Rufen Sie bitte die Anwendung erneut mit gültigen Ünglückszahlen auf");
-				logger.info("Keine gespeicherten Unglückszahlen vorhanden. Das Programm wird beendet.\n");
-				System.exit(0);
-			}
-		}		
-		System.out.println("Folgende Unglückszahlen werden verwendet: ");
-		System.out.println(java.util.Arrays.toString(unglueckszahlen));
-		logger.info("Die verwendeten Unglückszahlen " + java.util.Arrays.toString(unglueckszahlen) + " werden dem Benutzer angezeigt.");
+		System.out.println();
+		logger.info("Die Optionen wurden dem Benutzer angezeigt.");
 	}
 
 	public static  void createQuicktipp (int [] unglueckszahlen) {
@@ -204,16 +221,14 @@ public class Quicktipp {
 				if(unglueckszahlen.length>0) {
 					saveUnglueckszahlen(unglueckszahlen);
 				}
-				logger.info("Das Programm wird beendet.\n");
-				System.exit(0);
+				menu(unglueckszahlen);
 			case 2:
 				logger.info("Der Benutzer hat Option 2 (Eurojackpot) gewählt. Der Quicktipp wurde erstellt und angezeigt.");
 				eurojackpotQuicktipp(unglueckszahlen);
 				if(unglueckszahlen.length>0) {
 					saveUnglueckszahlen(unglueckszahlen);
 				}
-				logger.info("Das Programm wird beendet.\n");
-				System.exit(0);
+				menu(unglueckszahlen);
 			case 3:
 				logger.info("Der Benutzer hat Option 3 (Unglückszahlen löschen) gewählt.");
 				if(!unglueckszahlenSaved()) {
@@ -248,9 +263,7 @@ public class Quicktipp {
 
 	private static void menu (int [] unglueckszahlen) {
 
-		logger.info("Das Menü wird aufgerufen.");
-		filePresent();
-		useCorrectUnglueckszahlen(unglueckszahlen);
+		unglueckszahlenSource(unglueckszahlen);
 		printMenuOptions();	
 		createQuicktipp(unglueckszahlen);		
 	}
