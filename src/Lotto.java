@@ -2,7 +2,9 @@ import java.util.Random;
 
 public class Lotto extends Lotterie{
 
-	//Superzahl aus 0-9
+	/*
+	 * Superzahl aus 0-9
+	 */
 	private int superzahl;
 
 	public Lotto(int zuZiehendeKugeln, int gesamtzahlKugeln) {
@@ -16,7 +18,10 @@ public class Lotto extends Lotterie{
 		this.superzahl = superzahl;
 	}
 
-
+	/*
+	 * Superzahl wird aus 0-9 gezogen
+	 * Unglückszahlen werden berücksichtigt
+	 */
 	public int superzahlZiehen(int[] unglueckszahlen) { 
 		int superzahl = new Random().nextInt(10) ;
 		while(contains(unglueckszahlen,superzahl)) {
@@ -24,13 +29,19 @@ public class Lotto extends Lotterie{
 		}
 		return superzahl;	
 	}
-
+	
+	/*
+	 * Generiert einen Quicktipp für das Produkt Lotto (6aus49)
+	 */
 	@Override
 	public void generate(int[] unglueckszahlen) {
 		this.tippreihe = zahlenZiehen(6,49,unglueckszahlen);
 		this.superzahl = superzahlZiehen(unglueckszahlen);	
 	}
-
+	
+	/*
+	 * Prüft ob alle übergebenen UZ im Spiel Lotto vorkommen
+	 */
 	@Override
 	public boolean areValid(int[] unglueckszahlen) {
 		for(int i=0; i<unglueckszahlen.length;i++) {

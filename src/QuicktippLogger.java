@@ -5,7 +5,10 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class QuicktippLogger {
-
+	
+	/*
+	 * richtet den Logger ein
+	 */
 	public static Logger setupLogger()
 	{	
 		final Logger logger = Logger.getLogger(QuicktippLogger.class.getName());
@@ -14,6 +17,7 @@ public class QuicktippLogger {
 			FileHandler fh;
 			fh = new FileHandler("QuicktippLogger.log", true);
 			fh.setLevel(Level.FINE);
+			fh.setEncoding("UTF-8");
 			logger.addHandler(fh);
 			SimpleFormatter formatter = new SimpleFormatter();  
 			fh.setFormatter(formatter);  
