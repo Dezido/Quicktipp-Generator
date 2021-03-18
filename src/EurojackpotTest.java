@@ -7,7 +7,7 @@ class EurojackpotTest {
 	Eurojackpot e2 = new Eurojackpot(2,10);
 
 	/*
-	 * verschiedene Kombinationen von Ungl¸ckszahlen
+	 * verschiedene Kombinationen von Ungl√ºckszahlen
 	 */
 	private int [] u1 = {1,2,3,4};
 	private int [] u2 = {46,47,48,49,50};
@@ -17,7 +17,7 @@ class EurojackpotTest {
 	private int [] u6 = {4,5,6,7,8,9};
 	
 	/*
-	 * Testf‰lle Eurojackpot 5 aus 50 Ziehung
+	 * Testf√§lle Eurojackpot 5 aus 50 Ziehung
 	 */
 	private int [] t1 = e1.zahlenZiehen(e1.getZuZiehendeKugeln(), e1.getGesamtzahlKugeln(), u1);
 	private int [] t2 = e1.zahlenZiehen(e1.getZuZiehendeKugeln(), e1.getGesamtzahlKugeln(), u2);
@@ -26,7 +26,7 @@ class EurojackpotTest {
 	private int [] t5 = e1.zahlenZiehen(e1.getZuZiehendeKugeln(), e1.getGesamtzahlKugeln(), u5);
 	
 	/*
-	 * Testf‰lle Eurozahlen
+	 * Testf√§lle Eurozahlen
 	 */
 	private int [] ez1 = e2.zahlenZiehen(e2.getZuZiehendeKugeln(), e2.getGesamtzahlKugeln(), u1);
 	private int [] ez2 = e2.zahlenZiehen(e2.getZuZiehendeKugeln(), e2.getGesamtzahlKugeln(), u6);

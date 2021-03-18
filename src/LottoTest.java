@@ -6,7 +6,7 @@ class LottoTest {
 	Lotto l1= new Lotto (6,49);
 
 	/*
-	 * verschiedene Kombinationen von Unglückszahlen
+	 * verschiedene Kombinationen von UnglÃ¼ckszahlen
 	 */
 	private int[] u1 = {1,2,3,4,5,6};
 	private int[] u2 = {44,45,46,47,48,49};
@@ -15,7 +15,7 @@ class LottoTest {
 	private int[] u5 = {17,24,13,11,42};
 	
 	/*
-	 * Testfälle Lotto 6 aus 49 Ziehung
+	 * TestfÃ¤lle Lotto 6 aus 49 Ziehung
 	 */
 	private int [] t1 = l1.zahlenZiehen(l1.getZuZiehendeKugeln(), l1.getGesamtzahlKugeln(), u1);
 	private int [] t2 = l1.zahlenZiehen(l1.getZuZiehendeKugeln(), l1.getGesamtzahlKugeln(), u2);

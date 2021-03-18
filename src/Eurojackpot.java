@@ -17,7 +17,7 @@ public class Eurojackpot  extends Lotterie {
 	}
 	
 	/*
-	 * Generiert einen Quicktipp für das Produkt Eurojackpot
+	 * Generiert einen Quicktipp fÃ¼r das Produkt Eurojackpot
 	 */
 	@Override
 	public void generate(int[] unglueckszahlen) {
@@ -26,7 +26,7 @@ public class Eurojackpot  extends Lotterie {
 	}
 	
 	/*
-	 * Prüft ob alle übergebenen UZ im Spiel Eurojackpot vorkommen
+	 * PrÃ¼ft ob alle Ã¼bergebenen UZ im Spiel Eurojackpot vorkommen
 	 */
 	@Override
 	public boolean areValid(int[] unglueckszahlen) {

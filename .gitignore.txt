@@ -1,0 +1,2 @@
+/src/QuicktippLogger.log
+/src/Unglueckszahlen.txt

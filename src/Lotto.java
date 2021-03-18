@@ -20,7 +20,7 @@ public class Lotto extends Lotterie{
 
 	/*
 	 * Superzahl wird aus 0-9 gezogen
-	 * Unglückszahlen werden berücksichtigt
+	 * UnglÃ¼ckszahlen werden berÃ¼cksichtigt
 	 */
 	public int superzahlZiehen(int[] unglueckszahlen) { 
 		int superzahl = new Random().nextInt(10) ;
@@ -31,7 +31,7 @@ public class Lotto extends Lotterie{
 	}
 	
 	/*
-	 * Generiert einen Quicktipp für das Produkt Lotto (6aus49)
+	 * Generiert einen Quicktipp fÃ¼r das Produkt Lotto (6aus49)
 	 */
 	@Override
 	public void generate(int[] unglueckszahlen) {
@@ -40,7 +40,7 @@ public class Lotto extends Lotterie{
 	}
 	
 	/*
-	 * Prüft ob alle übergebenen UZ im Spiel Lotto vorkommen
+	 * Prï¿½ft ob alle Ã¼bergebenen UZ im Spiel Lotto vorkommen
 	 */
 	@Override
 	public boolean areValid(int[] unglueckszahlen) {

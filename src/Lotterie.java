@@ -43,7 +43,7 @@ public abstract class Lotterie implements Playable {
 	}
 
 	/*
-	 * zieht/tippt Zahlen unter Berücksichtigung der UZ
+	 * zieht/tippt Zahlen unter BerÃ¼cksichtigung der UZ
 	 */
 	public int []  zahlenZiehen(int zuZiehendeKugeln, int gesamtzahlKugeln, int[] unglueckszahlen) {
 		int [] gezogeneZahlen = new int [zuZiehendeKugeln];
