@@ -116,6 +116,7 @@ public class Quicktipp {
 		System.out.println();
 		System.out.print("Eingabe: ");
 		try {
+			@SuppressWarnings("resource")
 			Scanner keyboard = new Scanner(System.in);
 			int option = keyboard.nextInt();			
 			while (option<1||option>2) {

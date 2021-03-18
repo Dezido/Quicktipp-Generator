@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class LotterieTest {
 
-	Lotterie l1 = new Lotterie(5,10) { // fünf Kugeln ziehen
+	Lotterie l1 = new Lotterie(5,10) { // fÃ¼nf Kugeln ziehen
 		public void generate(int[] unglueckszahlen) {}
 		public boolean areValid(int[] unglueckszahlen) {return false;}
 	};
@@ -25,12 +25,12 @@ class LotterieTest {
 		public void generate(int[] unglueckszahlen) {}
 		public boolean areValid(int[] unglueckszahlen) {return false;}
 	};		
-	private int[] e1 = {1,4,6,9,10}; //übrig gebliebene Zahlen erwartet
+	private int[] e1 = {1,4,6,9,10}; //Ã¼brig gebliebene Zahlen erwartet
 	private int[] e2 = IntStream.range(1, 101).toArray(); //alle Kugeln von 1-100 erwartet
 	private int[] e3 = {};
 	private int[] e4 = {1}; //1 erwartet, da 2-100 UZ
 	private int[] e5 = {3}; //3 erwartet, da 1,2,4 und 5 UZ
-	private int[] u1 = {2,3,5,7,8}; //Unglückszahlen unzusammenhängend
+	private int[] u1 = {2,3,5,7,8}; //UnglÃ¼ckszahlen unzusammenhÃ¤ngend
 	private int[] u2 = {};
 	private int[] u3 = {};
 	private int[] u4 = IntStream.range(2, 101).toArray(); //UZ 2-100
