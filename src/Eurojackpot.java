@@ -21,7 +21,7 @@ public class Eurojackpot  extends Lotterie {
 	 */
 	@Override
 	public void generate(int[] unglueckszahlen) {
-		this.tippreihe = zahlenZiehen(5, 50, unglueckszahlen);
+		this.tippreihe = zahlenZiehen(this.zuZiehendeKugeln, this.gesamtzahlKugeln, unglueckszahlen);
 		this.eurozahlen = zahlenZiehen(2, 10, unglueckszahlen);
 	}
 	

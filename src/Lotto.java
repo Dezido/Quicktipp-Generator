@@ -35,7 +35,7 @@ public class Lotto extends Lotterie{
 	 */
 	@Override
 	public void generate(int[] unglueckszahlen) {
-		this.tippreihe = zahlenZiehen(6,49,unglueckszahlen);
+		this.tippreihe = zahlenZiehen(this.zuZiehendeKugeln,this.gesamtzahlKugeln,unglueckszahlen);
 		this.superzahl = superzahlZiehen(unglueckszahlen);	
 	}
 	
