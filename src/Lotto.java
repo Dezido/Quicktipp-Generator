@@ -29,7 +29,7 @@ public class Lotto extends Lotterie{
 		}
 		return superzahl;	
 	}
-	
+
 	/*
 	 * Generiert einen Quicktipp für das Produkt Lotto (6aus49)
 	 */
@@ -38,9 +38,9 @@ public class Lotto extends Lotterie{
 		this.tippreihe = zahlenZiehen(this.zuZiehendeKugeln,this.gesamtzahlKugeln,unglueckszahlen);
 		this.superzahl = superzahlZiehen(unglueckszahlen);	
 	}
-	
+
 	/*
-	 * Pr�ft ob alle übergebenen UZ im Spiel Lotto vorkommen
+	 * Prüft ob alle übergebenen UZ im Spiel Lotto vorkommen
 	 */
 	@Override
 	public boolean areValid(int[] unglueckszahlen) {
